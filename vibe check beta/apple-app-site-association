@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+        {
+          "appID": "KP5XB6RW79.com.brooke.vibe-check-beta",
+          "paths": ["/invite/*"]
+        }
+    ]
+  }
+}
