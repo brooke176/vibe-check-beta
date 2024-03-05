@@ -6,13 +6,13 @@ enum InviteStatus {
     case none, sent, accepted
 }
 
-
 struct InviteFriendsView: View {
     @EnvironmentObject var userViewModel: UserViewModel
-    @State private var showingContactPicker = false
-    @State private var activityItems: [Any]? = nil
     @State private var inviteStatus: InviteStatus = .none
-    
+    @State private var showingContactPicker = false
+    @State private var showingShareSheet = false
+    let testFlightLink = "https://testflight.apple.com/join/yourTestFlightCode"
+
     var body: some View {
         Group {
             switch inviteStatus {
@@ -27,56 +27,52 @@ struct InviteFriendsView: View {
     }
 
     var invitationView: some View {
-                NavigationView {
-                    VStack(spacing: 20) {
-                        Button("Pick from Contacts") {
-                            showingContactPicker = true
-                        }
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.blue)
-                        .cornerRadius(8)
-                        
-                        Button("Send Invitation") {
-                            activityItems = ["Join me on Vibe Checker! Download the app here: [App Store Link]"]
-                            inviteStatus = .sent
-                        }
-                        .padding()
-                        .foregroundColor(.white)
-                        .background(Color.green)
-                        .cornerRadius(8)
-
-                        Spacer()
-                    }
-                    .padding()
-                    .navigationTitle("Invite Friends")
-                    .sheet(isPresented: $showingContactPicker) {
-                        ContactPicker(phoneNumber: .constant(""))
-                    }
+        NavigationView {
+            VStack(spacing: 20) {
+                Button("Pick from Contacts") {
+                    showingContactPicker = true
                 }
-                .background(ActivityView(activityItems: $activityItems))
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.blue)
+                .cornerRadius(8)
+                
+                Button("Send Invitation") {
+                    self.showingShareSheet = true
+                }
+                .padding()
+                .foregroundColor(.white)
+                .background(Color.green)
+                .cornerRadius(8)
+                .sheet(isPresented: $showingShareSheet) {
+                    ActivityViewController(activityItems: ["Check out Vibe Checker on TestFlight: \(testFlightLink)"])
+                }
+
+                Spacer()
             }
-        }
-
-struct ActivityView: UIViewControllerRepresentable {
-    @Binding var activityItems: [Any]?
-
-    func makeUIViewController(context: Context) -> UIViewController {
-        return UIViewController()
-    }
-
-    func updateUIViewController(_ uiViewController: UIViewController, context: Context) {
-        guard let activityItems = activityItems else { return }
-        
-        let activityController = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
-        
-        if uiViewController.presentedViewController == nil {
-            uiViewController.present(activityController, animated: true) {
-                self.activityItems = nil
+            .padding()
+            .navigationTitle("Invite Friends")
+            .sheet(isPresented: $showingContactPicker) {
+                ContactPicker(phoneNumber: .constant(""))
             }
         }
     }
 }
+
+// MARK: - ActivityViewController Implementation
+struct ActivityViewController: UIViewControllerRepresentable {
+    var activityItems: [Any]
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}
+
+// MARK: - Contact Picker and other struct definitions remain unchanged
+
 
 // MARK: - Contact Picker Integration
 struct ContactPicker: UIViewControllerRepresentable {

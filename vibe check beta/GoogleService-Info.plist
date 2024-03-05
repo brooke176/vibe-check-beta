@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyAi33cKP0UwtCtFObQ47sCpFVExAnTyzag</string>
+	<key>GCM_SENDER_ID</key>
+	<string>716663296654</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.brooke.vibe-check-beta</string>
+	<key>PROJECT_ID</key>
+	<string>vibe-check-b98a5</string>
+	<key>STORAGE_BUCKET</key>
+	<string>vibe-check-b98a5.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:716663296654:ios:dd1deac9980f137039efdf</string>
+</dict>
+</plist>

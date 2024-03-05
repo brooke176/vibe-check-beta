@@ -1,46 +1,53 @@
 import SwiftUI
 import FirebaseCore
-
-class AppDelegate: NSObject, UIApplicationDelegate {
-  func application(_ application: UIApplication,
-                   didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-    FirebaseApp.configure()
-    return true
-  }
-}
+import FirebaseAuth
+import Combine
 
 @main
-struct vibe_check_betaApp: App {
+struct VibeCheckBetaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     @StateObject var userViewModel = UserViewModel()
-    @State private var showingAcceptInvitationView = false
-    @State private var inviteID: String? = nil
-    
+    @State private var activeLink: ActiveLink? = nil
+    @Environment(\.scenePhase) private var scenePhase
+    private var cancellables: Set<AnyCancellable> = []
+
+    enum ActiveLink {
+        case acceptInvitation(String), main
+    }
+
     var body: some Scene {
         WindowGroup {
             NavigationView {
-                if showingAcceptInvitationView, let inviteID = inviteID {
+                switch activeLink {
+                case .acceptInvitation(let inviteID):
                     AcceptInvitationView(inviterName: inviteID)
-                } else if userViewModel.numberOfFriends > 0 {
-                    ContentView().environmentObject(userViewModel)
-                } else {
-                    InviteFriendsView().environmentObject(userViewModel)
+                case .main, .none:
+                    if userViewModel.numberOfFriends > 0 {
+                        ContentView().environmentObject(userViewModel)
+                    } else {
+                        InviteFriendsView().environmentObject(userViewModel)
+                    }
                 }
             }
-            .onAppear {
-                let userID = "currentUserID"
-                userViewModel.fetchNumberOfFriends(userID: userID)
-            }
-            .onOpenURL { url in
-                handleDeepLink(url)
+        }
+        .onChange(of: scenePhase) { newPhase in
+            if newPhase == .active {
+                checkUserState()
             }
         }
     }
-
-    func handleDeepLink(_ url: URL) {
-        if url.pathComponents.contains("invite"), let lastComponent = url.pathComponents.last {
-            inviteID = lastComponent
-            showingAcceptInvitationView = true
+    
+    private func checkUserState() {
+        Auth.auth().addStateDidChangeListener { _, user in
+            if let user = user {
+                let userID = user.uid
+                self.userViewModel.fetchNumberOfFriends(userID: userID) {
+                    // Decide to show main content or invite friends based on the friend count
+                    self.activeLink = self.activeLink ?? .main
+                }
+            } else {
+                // No user signed in, consider showing a sign-in view or handling accordingly
+            }
         }
     }
 }

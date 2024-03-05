@@ -13,7 +13,6 @@
 		EEADCC642B96852200DD672E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEADCC632B96852200DD672E /* Preview Assets.xcassets */; };
 		EEADCC6B2B96854900DD672E /* InviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC6A2B96854900DD672E /* InviteFriendsView.swift */; };
 		EEADCC6D2B968F5F00DD672E /* AcceptInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */; };
-		EEADCC7C2B969A3A00DD672E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEADCC7B2B969A3A00DD672E /* GoogleService-Info.plist */; };
 		EEADCC7E2B969C6F00DD672E /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC7D2B969C6F00DD672E /* UserViewModel.swift */; };
 		EEADCC822B96A0A400DD672E /* apple-app-site-association in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC812B96A0A400DD672E /* apple-app-site-association */; };
 		EEADCC852B96A79200DD672E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = EEADCC842B96A79200DD672E /* FirebaseAnalytics */; };
@@ -43,6 +42,8 @@
 		EEADCCB52B96A79300DD672E /* FirebaseRemoteConfigSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EEADCCB42B96A79300DD672E /* FirebaseRemoteConfigSwift */; };
 		EEADCCB72B96A79300DD672E /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = EEADCCB62B96A79300DD672E /* FirebaseStorage */; };
 		EEADCCB92B96A79300DD672E /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = EEADCCB82B96A79300DD672E /* FirebaseStorageCombine-Community */; };
+		EEADCCBB2B96AE7400DD672E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */; };
+		EEADCCBD2B96B05F00DD672E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCCBC2B96B05F00DD672E /* AppDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,11 +54,12 @@
 		EEADCC632B96852200DD672E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EEADCC6A2B96854900DD672E /* InviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteFriendsView.swift; sourceTree = "<group>"; };
 		EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInvitationView.swift; sourceTree = "<group>"; };
-		EEADCC7B2B969A3A00DD672E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEADCC7D2B969C6F00DD672E /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		EEADCC7F2B969D7100DD672E /* vibe-check-beta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "vibe-check-beta-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EEADCC802B96A01800DD672E /* vibe check beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "vibe check beta.entitlements"; sourceTree = "<group>"; };
 		EEADCC812B96A0A400DD672E /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
+		EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EEADCCBC2B96B05F00DD672E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,12 +122,13 @@
 				EEADCC812B96A0A400DD672E /* apple-app-site-association */,
 				EEADCC802B96A01800DD672E /* vibe check beta.entitlements */,
 				EEADCC7F2B969D7100DD672E /* vibe-check-beta-Info.plist */,
+				EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */,
 				EEADCC5C2B96852100DD672E /* vibe_check_betaApp.swift */,
+				EEADCCBC2B96B05F00DD672E /* AppDelegate.swift */,
 				EEADCC7D2B969C6F00DD672E /* UserViewModel.swift */,
 				EEADCC5E2B96852100DD672E /* ContentView.swift */,
 				EEADCC6A2B96854900DD672E /* InviteFriendsView.swift */,
 				EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */,
-				EEADCC7B2B969A3A00DD672E /* GoogleService-Info.plist */,
 				EEADCC602B96852200DD672E /* Assets.xcassets */,
 				EEADCC622B96852200DD672E /* Preview Content */,
 			);
@@ -232,7 +235,7 @@
 			files = (
 				EEADCC642B96852200DD672E /* Preview Assets.xcassets in Resources */,
 				EEADCC612B96852200DD672E /* Assets.xcassets in Resources */,
-				EEADCC7C2B969A3A00DD672E /* GoogleService-Info.plist in Resources */,
+				EEADCCBB2B96AE7400DD672E /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +250,7 @@
 				EEADCC5F2B96852100DD672E /* ContentView.swift in Sources */,
 				EEADCC6D2B968F5F00DD672E /* AcceptInvitationView.swift in Sources */,
 				EEADCC5D2B96852100DD672E /* vibe_check_betaApp.swift in Sources */,
+				EEADCCBD2B96B05F00DD672E /* AppDelegate.swift in Sources */,
 				EEADCC7E2B969C6F00DD672E /* UserViewModel.swift in Sources */,
 				EEADCC6B2B96854900DD672E /* InviteFriendsView.swift in Sources */,
 			);
