@@ -1,118 +1,137 @@
 import SwiftUI
 import UserNotifications
+import Auth0
 
 struct ContentView: View {
-    @EnvironmentObject var userViewModel: UserViewModel
+    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var wantsToGoOut = false
-    @State private var selectedFriends: [String] = []
-    let friendsList = ["Amanda", "Brooke", "Julia", "Trey", "Joe"]
-    @State var numberOfFriends = 0 // Ensure this is declared
 
     var body: some View {
         ZStack {
-            LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                .edgesIgnoringSafeArea(.all)
+            BackgroundGradientView()
 
             VStack {
-                            Text("Who you tryna see? ✨")
-                                .font(.title)
-                                .fontWeight(.heavy)
-                                .foregroundColor(.white)
-                                .padding(.top, 20)
-                                .shadow(radius: 5)
-                            
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 10) {
-                                    ForEach(friendsList, id: \.self) { friend in
-                                        FriendCircleView(friend: friend, isSelected: self.selectedFriends.contains(friend))
-                                            .onTapGesture {
-                                                self.toggleFriendSelection(friend)
-                                            }
-                                    }
-                                }
-                            }
-                            .frame(height: 120)
-                            .padding(.top, 10)
-                            
-                            Spacer()
-                            Button(action: {
-                                withAnimation(.spring()) {
-                                    self.wantsToGoOut.toggle()
-                                }
-                                if wantsToGoOut {
-                                    scheduleNotification()
-                                }
-                            }) {
-                                Text(wantsToGoOut ? "🚫 nvm lol" : "✨ Let's Go Out!")
-                                    .font(.title)
-                                    .fontWeight(.bold)
-                                    .foregroundColor(.white)
-                                    .padding()
-                                    .background(wantsToGoOut ? Color.pink : Color.blue)
-                                    .cornerRadius(40)
-                                    .shadow(color: .black, radius: 10, x: 0, y: 5)
-                                    .scaleEffect(wantsToGoOut ? 1.1 : 1.0)
-                            }
-                            .padding(.bottom, 50)
-                            Spacer()
-                        }
-                    }
-                }
-                
-                func toggleFriendSelection(_ friend: String) {
-                    if let index = selectedFriends.firstIndex(of: friend) {
-                        selectedFriends.remove(at: index)
-                    } else {
-                        selectedFriends.append(friend)
-                    }
-                }
-                
-                func scheduleNotification() {
-                    let center = UNUserNotificationCenter.current()
-                    
-                    center.requestAuthorization(options: [.alert, .sound]) { granted, error in
-                        if granted {
-                            let content = UNMutableNotificationContent()
-                            content.title = "Let's Go Out!"
-                            content.body = "You're ready to go out! Let's see if your friends are too!"
-                            content.sound = UNNotificationSound.default
-                            
-                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                            
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                            
-                            center.add(request)
-                        }
-                    }
+                HeaderView(title: "Who you tryna see? ✨")
+                FriendsScrollView()
+                GoOutButton(wantsToGoOut: $wantsToGoOut) {
+                    scheduleNotification()
                 }
             }
+        }
+    }
 
-            struct FriendCircleView: View {
-                var friend: String
-                var isSelected: Bool
-                
-                var body: some View {
-                    Text(friend)
-                        .font(.caption)
-                        .fontWeight(.bold)
-                        .frame(width: 50, height: 50)
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(isSelected ? Color.green : Color.gray.opacity(0.5))
-                        .clipShape(Circle())
-                        .overlay(
-                            Circle()
-                                .stroke(isSelected ? Color.green : Color.clear, lineWidth: 3)
-                        )
-                        .animation(.easeInOut, value: isSelected)
-                        .fixedSize()
-                        .shadow(radius: 3)
+    private func scheduleNotification() {
+        let center = UNUserNotificationCenter.current()
+
+        center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
+            if granted {
+                let content = UNMutableNotificationContent()
+                content.title = "Let's Go Out!"
+                content.body = "You're ready to go out! Let's see if your friends are too!"
+                content.sound = UNNotificationSound.default
+
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                center.add(request)
+            }
+        }
+    }
+}
+
+struct BackgroundGradientView: View {
+    var body: some View {
+        LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
+            .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct HeaderView: View {
+    let title: String
+
+    var body: some View {
+        Text(title)
+            .font(.largeTitle)
+            .fontWeight(.bold)
+            .foregroundColor(.white)
+            .padding()
+            .shadow(radius: 10)
+    }
+}
+
+struct FriendsScrollView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(authViewModel.friends) { friend in
+                    FriendCircleView(friend: friend.firstName, isSelected: authViewModel.selectedFriends.contains(friend.id))
+                        .onTapGesture {
+                            toggleFriendSelection(friend.id)
+                        }
                 }
             }
+            .padding()
+        }
+        .frame(height: 100)
+    }
+
+    private func toggleFriendSelection(_ friendID: String) {
+        if let index = authViewModel.selectedFriends.firstIndex(of: friendID) {
+            authViewModel.selectedFriends.remove(at: index)
+        } else {
+            authViewModel.selectedFriends.append(friendID)
+        }
+    }
+}
+
+struct FriendCircleView: View {
+    var friend: String
+    var isSelected: Bool
+
+    var body: some View {
+        Text(friend)
+            .font(.caption)
+            .fontWeight(.medium)
+            .foregroundColor(.white)
+            .padding(10)
+            .background(isSelected ? Color.green : Color.gray)
+            .clipShape(Circle())
+            .overlay(Circle().stroke(isSelected ? Color.green : Color.clear, lineWidth: 2))
+            .animation(.easeInOut, value: isSelected)
+            .shadow(radius: 3)
+    }
+}
+
+
+struct GoOutButton: View {
+    @Binding var wantsToGoOut: Bool
+    let action: () -> Void
+
+    var body: some View {
+        Button(action: {
+            withAnimation {
+                wantsToGoOut.toggle()
+                action()
+            }
+        }) {
+            Text(wantsToGoOut ? "🚫 nvm lol" : "✨ Let's Go Out!")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.white)
+                .padding()
+                .background(wantsToGoOut ? Color.red : Color.green)
+                .cornerRadius(30)
+                .shadow(radius: 5)
+        }
+        .padding(.bottom, 50)
+    }
+}
 
             struct ContentView_Previews: PreviewProvider {
                 static var previews: some View {
-                    ContentView()
+                    @EnvironmentObject var authViewModel: AuthViewModel
+                    ContentView().environmentObject(authViewModel)
                 }
             }

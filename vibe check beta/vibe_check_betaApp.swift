@@ -1,34 +1,31 @@
 import SwiftUI
-import FirebaseCore
-import FirebaseAuth
-import Combine
+import Auth0
+import UIKit
+
+class AppDelegate: UIResponder, UIApplicationDelegate {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        return true
+    }
+}
 
 @main
 struct VibeCheckBetaApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    @StateObject var userViewModel = UserViewModel()
+    @StateObject var authViewModel = AuthViewModel()
     @State private var activeLink: ActiveLink? = nil
     @Environment(\.scenePhase) private var scenePhase
-    private var cancellables: Set<AnyCancellable> = []
-
+    
     enum ActiveLink {
-        case acceptInvitation(String), main
+        case acceptInvitation(inviterUserID: String), main
     }
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                switch activeLink {
-                case .acceptInvitation(let inviteID):
-                    AcceptInvitationView(inviterName: inviteID)
-                case .main, .none:
-                    if userViewModel.numberOfFriends > 0 {
-                        ContentView().environmentObject(userViewModel)
-                    } else {
-                        InviteFriendsView().environmentObject(userViewModel)
-                    }
+            ContentView()
+                .environmentObject(authViewModel)
+                .onAppear {
+                    checkUserState()
                 }
-            }
         }
         .onChange(of: scenePhase) { newPhase in
             if newPhase == .active {
@@ -37,17 +34,21 @@ struct VibeCheckBetaApp: App {
         }
     }
     
-    private func checkUserState() {
-        Auth.auth().addStateDidChangeListener { _, user in
-            if let user = user {
-                let userID = user.uid
-                self.userViewModel.fetchNumberOfFriends(userID: userID) {
-                    // Decide to show main content or invite friends based on the friend count
-                    self.activeLink = self.activeLink ?? .main
+    func checkUserState() {
+        authViewModel.checkAuth0Session { isAuthenticated in
+            if isAuthenticated {
+                if let activeLink = activeLink, case let .acceptInvitation(inviteID) = activeLink {
+                    acceptInvitation(inviteID: inviteID)
+                } else {
+                    self.activeLink = .main
                 }
             } else {
-                // No user signed in, consider showing a sign-in view or handling accordingly
+                self.activeLink = nil
             }
         }
+    }
+
+    func acceptInvitation(inviteID: String) {
+        self.activeLink = .acceptInvitation(inviterUserID: inviteID)
     }
 }

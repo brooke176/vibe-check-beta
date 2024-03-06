@@ -1,76 +1,66 @@
 import SwiftUI
-import Foundation
-
-class NetworkManager {
-    static let shared = NetworkManager()
-
-    private var friendsList: [String] = []
-
-    func addFriend(name: String, completion: @escaping (Bool) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.friendsList.append(name)
-            completion(true)
-        }
-    }
-
-    func fetchNumberOfFriends(completion: @escaping (Int) -> Void) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            completion(self.friendsList.count)
-        }
-    }
-}
+import Auth0
 
 struct AcceptInvitationView: View {
-    let inviterName: String
+    let inviterUserID: String
     @State private var hasAccepted: Bool?
     @State private var showingContentView = false
-    
-    var body: some View {
-        VStack(spacing: 20) {
-            Text("🎉 You've got a vibe check from \(inviterName)! 🎉")
-                .font(.title)
-                .multilineTextAlignment(.center)
-                .padding()
-            
-            Text("Do you want to accept \(inviterName)'s invitation to connect?")
-                .font(.headline)
-                .padding()
-            
-            HStack(spacing: 40) {
-                Button("Accept") {
-                    acceptInvitation(accepted: true)
-                }
-                .buttonStyle(PrimaryButtonStyle(backgroundColor: .green))
-                
-                Button("Decline") {
-                    acceptInvitation(accepted: false)
-                }
-                .buttonStyle(PrimaryButtonStyle(backgroundColor: .red))
-            }
-            .padding()
-            
-            NavigationLink(destination: ContentView(), isActive: $showingContentView) { EmptyView() }
-        }
-    }
-    
-    func acceptInvitation(accepted: Bool) {
-        self.hasAccepted = accepted
-        
-        if accepted {
-            NetworkManager.shared.addFriend(name: inviterName) { success in
-                DispatchQueue.main.async {
-                    if success {
-                        self.showingContentView = true
-                    } else {
-                        print("Failed to add friend.")
-                    }
-                }
-            }
-        }
-    }
-}
+    @State var invitedName: String = "Brooke"
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @State var userProfile = Profile.empty
 
-struct PrimaryButtonStyle: ButtonStyle {
+    var body: some View {
+        ZStack {
+            NavigationLink(destination: ContentView().environmentObject(authViewModel), isActive: $authViewModel.navigateToContent) {
+                EmptyView()
+            }
+            LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.purple.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+                .edgesIgnoringSafeArea(.all)
+            
+            VStack(spacing: 20) {
+                Spacer()
+                
+                Text("🎉 You've got a vibe check from \(invitedName)! 🎉")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                    .background(Color.black.opacity(0.5))
+                    .cornerRadius(15)
+                
+                Text("Enter your name below and press accept if you would like to accept \(invitedName)'s invitation to connect.")
+                    .font(.title2)
+                    .fontWeight(.medium)
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Color.black.opacity(0.5))
+                    .cornerRadius(15)
+                
+                TextField("Your Name", text: $invitedName)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .padding()
+                
+                HStack(spacing: 40) {
+                    Button("Accept") {
+                        authViewModel.acceptInvitation(inviteID: inviterUserID)
+                    }
+                    .buttonStyle(SleekButtonStyle(backgroundColor: Color.green))
+                    
+                    Button("Decline") {
+                        print("nvm")
+                    }
+                    .buttonStyle(SleekButtonStyle(backgroundColor: Color.red))
+                }
+                .padding(.bottom, 50)
+                
+                Spacer()
+            }
+        }
+    }
+    }
+
+struct SleekButtonStyle: ButtonStyle {
     var backgroundColor: Color
     
     func makeBody(configuration: Configuration) -> some View {
@@ -78,15 +68,16 @@ struct PrimaryButtonStyle: ButtonStyle {
             .foregroundColor(.white)
             .padding()
             .background(backgroundColor)
-            .cornerRadius(20)
-            .scaleEffect(configuration.isPressed ? 0.95 : 1.0)
+            .cornerRadius(15)
+            .shadow(radius: 10)
+            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
+            .animation(.easeOut, value: configuration.isPressed)
     }
 }
-
 
 struct AcceptInvitationView_Previews: PreviewProvider {
     static var previews: some View {
-        AcceptInvitationView(inviterName: "Jamie")
+        let inviterUserID: String = "Brooke"
+        AcceptInvitationView(inviterUserID: inviterUserID)
     }
 }
-
