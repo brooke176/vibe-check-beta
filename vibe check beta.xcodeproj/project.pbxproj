@@ -13,7 +13,6 @@
 		EEADCC642B96852200DD672E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEADCC632B96852200DD672E /* Preview Assets.xcassets */; };
 		EEADCC6D2B968F5F00DD672E /* AcceptInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */; };
 		EEADCC7E2B969C6F00DD672E /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC7D2B969C6F00DD672E /* AuthViewModel.swift */; };
-		EEADCC822B96A0A400DD672E /* apple-app-site-association in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC812B96A0A400DD672E /* apple-app-site-association */; };
 		EEADCCBB2B96AE7400DD672E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */; };
 		EEADCCBF2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCCBE2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift */; };
 		EEADCCC22B97BF7600DD672E /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = EEADCCC12B97BF7600DD672E /* Auth0 */; };
@@ -31,7 +30,6 @@
 		EEADCC7D2B969C6F00DD672E /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		EEADCC7F2B969D7100DD672E /* vibe-check-beta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "vibe-check-beta-Info.plist"; path = "vibe check beta/Utils/vibe-check-beta-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EEADCC802B96A01800DD672E /* vibe check beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "vibe check beta.entitlements"; sourceTree = "<group>"; };
-		EEADCC812B96A0A400DD672E /* apple-app-site-association */ = {isa = PBXFileReference; lastKnownFileType = text; path = "apple-app-site-association"; sourceTree = "<group>"; };
 		EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EEADCCBE2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAndInviteFriendsView.swift; sourceTree = "<group>"; };
 		EEADCCC32B97BFCC00DD672E /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 			isa = PBXGroup;
 			children = (
 				EEADCC802B96A01800DD672E /* vibe check beta.entitlements */,
-				EEADCC812B96A0A400DD672E /* apple-app-site-association */,
 				EEADCC7F2B969D7100DD672E /* vibe-check-beta-Info.plist */,
 				EEADCCC32B97BFCC00DD672E /* Auth0.plist */,
 				EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */,
@@ -180,7 +177,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEADCC822B96A0A400DD672E /* apple-app-site-association in Sources */,
 				EEADCCC62B97C1DC00DD672E /* Profile.swift in Sources */,
 				EEADCC5F2B96852100DD672E /* ContentView.swift in Sources */,
 				EEADCCBF2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift in Sources */,
@@ -320,6 +316,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "vibe check beta/vibe check beta.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"vibe check beta/Preview Content\"";
@@ -351,6 +348,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "vibe check beta/vibe check beta.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"vibe check beta/Preview Content\"";
