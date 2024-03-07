@@ -7,20 +7,20 @@ struct SignUpAndInviteFriendsView: View {
     @State private var name = ""
     @State private var showingContactPicker = false
     @State private var showingShareSheet = false
-    @State private var isAuthenticated = true
     @State var userProfile = Profile.empty
     let testFlightLink = "https://testflight.apple.com/join/AWthlKxo"
-    
+
     var body: some View {
-        ZStack {
+            ZStack {
+                
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.6), Color.purple.opacity(0.6)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                 .edgesIgnoringSafeArea(.all)
             
-            if authViewModel.userSignedIn {
-                inviteFriendsSection
-            } else {
-                welcomeAndSignUpSection
-            }
+                if authViewModel.userSignedIn {
+                    ContentView()
+                } else {
+                    welcomeAndSignUpSection
+                }
         }
         .sheet(isPresented: $showingShareSheet) {
             ActivityViewController(activityItems: ["Check out vibe check on TestFlight: \(testFlightLink)"])

@@ -91,8 +91,8 @@
 		EEADCCC92B97F18700DD672E /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				EEADCC802B96A01800DD672E /* vibe check beta.entitlements */,
 				EEADCC7F2B969D7100DD672E /* vibe-check-beta-Info.plist */,
+				EEADCC802B96A01800DD672E /* vibe check beta.entitlements */,
 				EEADCCC32B97BFCC00DD672E /* Auth0.plist */,
 				EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */,
 			);
@@ -315,7 +315,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "vibe check beta/vibe check beta.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "vibe check beta/Utils/vibe check beta.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -323,7 +323,9 @@
 				DEVELOPMENT_TEAM = KP5XB6RW79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "vibe-check-beta-Info.plist";
+				INFOPLIST_FILE = "vibe check beta/Utils/vibe-check-beta-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "vibe check";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -347,7 +349,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "vibe check beta/vibe check beta.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "vibe check beta/Utils/vibe check beta.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -355,7 +357,9 @@
 				DEVELOPMENT_TEAM = KP5XB6RW79;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "vibe-check-beta-Info.plist";
+				INFOPLIST_FILE = "vibe check beta/Utils/vibe-check-beta-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "vibe check";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.social-networking";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

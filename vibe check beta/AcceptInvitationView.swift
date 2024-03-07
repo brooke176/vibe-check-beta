@@ -43,7 +43,7 @@ struct AcceptInvitationView: View {
                 
                 HStack(spacing: 40) {
                     Button("Accept") {
-                        authViewModel.acceptInvitation(inviteID: inviterUserID)
+//                        authViewModel.acceptInvitation(inviteID: inviterUserID)
                     }
                     .buttonStyle(SleekButtonStyle(backgroundColor: Color.green))
                     

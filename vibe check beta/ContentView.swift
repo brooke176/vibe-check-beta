@@ -2,10 +2,11 @@ import SwiftUI
 import UserNotifications
 import Auth0
 
+
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
     @State private var wantsToGoOut = false
-
+    
     var body: some View {
         ZStack {
             BackgroundGradientView()
@@ -66,9 +67,9 @@ struct FriendsScrollView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 ForEach(authViewModel.friends) { friend in
-                    FriendCircleView(friend: friend.firstName, isSelected: authViewModel.selectedFriends.contains(friend.id))
+                    FriendCircleView(friend: friend.id, isSelected: authViewModel.selectedFriends.contains(friend.id))
                         .onTapGesture {
-                            toggleFriendSelection(friend.id)
+                            self.toggleFriendSelection(friend.id)
                         }
                 }
             }
@@ -76,7 +77,7 @@ struct FriendsScrollView: View {
         }
         .frame(height: 100)
     }
-
+    
     private func toggleFriendSelection(_ friendID: String) {
         if let index = authViewModel.selectedFriends.firstIndex(of: friendID) {
             authViewModel.selectedFriends.remove(at: index)
@@ -91,7 +92,7 @@ struct FriendCircleView: View {
     var isSelected: Bool
 
     var body: some View {
-        Text(friend)
+        Text(String(friend.prefix(5)))
             .font(.caption)
             .fontWeight(.medium)
             .foregroundColor(.white)
@@ -129,9 +130,9 @@ struct GoOutButton: View {
     }
 }
 
-            struct ContentView_Previews: PreviewProvider {
-                static var previews: some View {
-                    @EnvironmentObject var authViewModel: AuthViewModel
-                    ContentView().environmentObject(authViewModel)
-                }
-            }
+//struct ContentView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        let authViewModel = AuthViewModel(friendsList: ["823491832u4323e213e12323e1", "1234823491832u4323e213e12323e1", "823491832u4323e213e12323e123", "314132823491832u4323e213e12323e1", "1341323823491832u4323e213e12323e1"])
+//        ContentView().environmentObject(authViewModel)
+//    }
+//}

@@ -26,11 +26,9 @@ struct VibeCheckBetaApp: App {
                 .onAppear {
                     checkUserState()
                 }
-        }
-        .onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                checkUserState()
-            }
+                .onChange(of: scenePhase) { _ in
+                    checkUserState()
+                }
         }
     }
     
