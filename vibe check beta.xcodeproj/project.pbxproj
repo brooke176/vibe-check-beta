@@ -7,33 +7,56 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EE6A756F2B9A54BC0022E297 /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = EE6A756E2B9A54BC0022E297 /* Auth0 */; };
+		EE81FFB62B9A6E91009FC75C /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE81FFB52B9A6E91009FC75C /* AuthView.swift */; };
+		EE81FFB82B9A6EF9009FC75C /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE81FFB72B9A6EF9009FC75C /* Profile.swift */; };
+		EE81FFB92B9A9FF4009FC75C /* JWTDecode.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6A75722B9A594E0022E297 /* JWTDecode.xcframework */; };
+		EE81FFBA2B9A9FF4009FC75C /* JWTDecode.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE6A75722B9A594E0022E297 /* JWTDecode.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE81FFBB2B9A9FF5009FC75C /* SimpleKeychain.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6A75712B9A594E0022E297 /* SimpleKeychain.xcframework */; };
+		EE81FFBC2B9A9FF5009FC75C /* SimpleKeychain.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE6A75712B9A594E0022E297 /* SimpleKeychain.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EEADCC5D2B96852100DD672E /* vibe_check_betaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC5C2B96852100DD672E /* vibe_check_betaApp.swift */; };
 		EEADCC5F2B96852100DD672E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC5E2B96852100DD672E /* ContentView.swift */; };
 		EEADCC612B96852200DD672E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEADCC602B96852200DD672E /* Assets.xcassets */; };
 		EEADCC642B96852200DD672E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEADCC632B96852200DD672E /* Preview Assets.xcassets */; };
 		EEADCC6D2B968F5F00DD672E /* AcceptInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */; };
-		EEADCC7E2B969C6F00DD672E /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC7D2B969C6F00DD672E /* AuthViewModel.swift */; };
 		EEADCCBB2B96AE7400DD672E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */; };
-		EEADCCBF2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCCBE2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift */; };
-		EEADCCC22B97BF7600DD672E /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = EEADCCC12B97BF7600DD672E /* Auth0 */; };
+		EEADCCBF2B96C43F00DD672E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCCBE2B96C43F00DD672E /* LoginView.swift */; };
 		EEADCCC42B97BFCD00DD672E /* Auth0.plist in Resources */ = {isa = PBXBuildFile; fileRef = EEADCCC32B97BFCC00DD672E /* Auth0.plist */; };
-		EEADCCC62B97C1DC00DD672E /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCCC52B97C1DC00DD672E /* Profile.swift */; };
+		EEEF2E022B9A4045003049F9 /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEEF2E012B9A4045003049F9 /* Common.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		EE6A757C2B9A64E80022E297 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				EE81FFBA2B9A9FF4009FC75C /* JWTDecode.xcframework in Embed Frameworks */,
+				EE81FFBC2B9A9FF5009FC75C /* SimpleKeychain.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		EE6A75712B9A594E0022E297 /* SimpleKeychain.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SimpleKeychain.xcframework; path = Carthage/Build/SimpleKeychain.xcframework; sourceTree = "<group>"; };
+		EE6A75722B9A594E0022E297 /* JWTDecode.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JWTDecode.xcframework; path = Carthage/Build/JWTDecode.xcframework; sourceTree = "<group>"; };
+		EE81FFB52B9A6E91009FC75C /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		EE81FFB72B9A6EF9009FC75C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		EEADCC592B96852100DD672E /* vibe check beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "vibe check beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEADCC5C2B96852100DD672E /* vibe_check_betaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vibe_check_betaApp.swift; sourceTree = "<group>"; };
 		EEADCC5E2B96852100DD672E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		EEADCC602B96852200DD672E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EEADCC632B96852200DD672E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptInvitationView.swift; sourceTree = "<group>"; };
-		EEADCC7D2B969C6F00DD672E /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		EEADCC7F2B969D7100DD672E /* vibe-check-beta-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "vibe-check-beta-Info.plist"; path = "vibe check beta/Utils/vibe-check-beta-Info.plist"; sourceTree = SOURCE_ROOT; };
 		EEADCC802B96A01800DD672E /* vibe check beta.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "vibe check beta.entitlements"; sourceTree = "<group>"; };
 		EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		EEADCCBE2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpAndInviteFriendsView.swift; sourceTree = "<group>"; };
+		EEADCCBE2B96C43F00DD672E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		EEADCCC32B97BFCC00DD672E /* Auth0.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Auth0.plist; sourceTree = "<group>"; };
-		EEADCCC52B97C1DC00DD672E /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		EEEF2E012B9A4045003049F9 /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,18 +64,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEADCCC22B97BF7600DD672E /* Auth0 in Frameworks */,
+				EE6A756F2B9A54BC0022E297 /* Auth0 in Frameworks */,
+				EE81FFB92B9A9FF4009FC75C /* JWTDecode.xcframework in Frameworks */,
+				EE81FFBB2B9A9FF5009FC75C /* SimpleKeychain.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EE6A756D2B9A54BC0022E297 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EE6A75722B9A594E0022E297 /* JWTDecode.xcframework */,
+				EE6A75712B9A594E0022E297 /* SimpleKeychain.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EEADCC502B96852100DD672E = {
 			isa = PBXGroup;
 			children = (
 				EEADCC5B2B96852100DD672E /* vibe check beta */,
 				EEADCC5A2B96852100DD672E /* Products */,
+				EE6A756D2B9A54BC0022E297 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,11 +104,11 @@
 			children = (
 				EEADCCC92B97F18700DD672E /* Utils */,
 				EEADCC5C2B96852100DD672E /* vibe_check_betaApp.swift */,
-				EEADCC7D2B969C6F00DD672E /* AuthViewModel.swift */,
+				EE81FFB52B9A6E91009FC75C /* AuthView.swift */,
+				EE81FFB72B9A6EF9009FC75C /* Profile.swift */,
 				EEADCC5E2B96852100DD672E /* ContentView.swift */,
-				EEADCCBE2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift */,
+				EEADCCBE2B96C43F00DD672E /* LoginView.swift */,
 				EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */,
-				EEADCCC52B97C1DC00DD672E /* Profile.swift */,
 				EEADCC602B96852200DD672E /* Assets.xcassets */,
 				EEADCC622B96852200DD672E /* Preview Content */,
 			);
@@ -95,6 +130,7 @@
 				EEADCC802B96A01800DD672E /* vibe check beta.entitlements */,
 				EEADCCC32B97BFCC00DD672E /* Auth0.plist */,
 				EEADCCBA2B96AE7400DD672E /* GoogleService-Info.plist */,
+				EEEF2E012B9A4045003049F9 /* Common.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -109,6 +145,7 @@
 				EEADCC552B96852100DD672E /* Sources */,
 				EEADCC562B96852100DD672E /* Frameworks */,
 				EEADCC572B96852100DD672E /* Resources */,
+				EE6A757C2B9A64E80022E297 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -116,7 +153,7 @@
 			);
 			name = "vibe check beta";
 			packageProductDependencies = (
-				EEADCCC12B97BF7600DD672E /* Auth0 */,
+				EE6A756E2B9A54BC0022E297 /* Auth0 */,
 			);
 			productName = "vibe check beta";
 			productReference = EEADCC592B96852100DD672E /* vibe check beta.app */;
@@ -147,7 +184,7 @@
 			);
 			mainGroup = EEADCC502B96852100DD672E;
 			packageReferences = (
-				EEADCCC02B97BF7600DD672E /* XCRemoteSwiftPackageReference "Auth0" */,
+				EE6A756A2B9A4BF00022E297 /* XCRemoteSwiftPackageReference "Auth0" */,
 			);
 			productRefGroup = EEADCC5A2B96852100DD672E /* Products */;
 			projectDirPath = "";
@@ -177,12 +214,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EEADCCC62B97C1DC00DD672E /* Profile.swift in Sources */,
 				EEADCC5F2B96852100DD672E /* ContentView.swift in Sources */,
-				EEADCCBF2B96C43F00DD672E /* SignUpAndInviteFriendsView.swift in Sources */,
+				EEADCCBF2B96C43F00DD672E /* LoginView.swift in Sources */,
 				EEADCC6D2B968F5F00DD672E /* AcceptInvitationView.swift in Sources */,
+				EEEF2E022B9A4045003049F9 /* Common.swift in Sources */,
+				EE81FFB62B9A6E91009FC75C /* AuthView.swift in Sources */,
+				EE81FFB82B9A6EF9009FC75C /* Profile.swift in Sources */,
 				EEADCC5D2B96852100DD672E /* vibe_check_betaApp.swift in Sources */,
-				EEADCC7E2B969C6F00DD672E /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -338,9 +376,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brooke.vibe-check-beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -372,9 +414,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.brooke.vibe-check-beta";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -402,7 +448,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		EEADCCC02B97BF7600DD672E /* XCRemoteSwiftPackageReference "Auth0" */ = {
+		EE6A756A2B9A4BF00022E297 /* XCRemoteSwiftPackageReference "Auth0" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/auth0/Auth0.swift";
 			requirement = {
@@ -413,9 +459,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		EEADCCC12B97BF7600DD672E /* Auth0 */ = {
+		EE6A756E2B9A54BC0022E297 /* Auth0 */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = EEADCCC02B97BF7600DD672E /* XCRemoteSwiftPackageReference "Auth0" */;
+			package = EE6A756A2B9A4BF00022E297 /* XCRemoteSwiftPackageReference "Auth0" */;
 			productName = Auth0;
 		};
 /* End XCSwiftPackageProductDependency section */

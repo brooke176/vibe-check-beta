@@ -1,0 +1,107 @@
+name: CI
+
+on:
+    pull_request:
+      types:
+        - opened
+        - synchronize
+
+permissions: {}
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: ${{ github.ref != 'refs/heads/master' }}
+
+jobs:
+    test:
+        name: Test on ${{ matrix.platform.os }} using Xcode ${{ matrix.xcode }}
+        runs-on: macos-13
+
+        env:
+            xcodeproj: Auth0.xcodeproj
+
+        strategy:
+          matrix:
+            platform: 
+              - { os: iOS, scheme: Auth0.iOS }
+              - { os: macOS, scheme: Auth0.macOS }
+              - { os: tvOS, scheme: Auth0.tvOS }
+            xcode: 
+              - '15.0.1'
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+            - name: Set up environment
+              uses: ./.github/actions/setup
+              with:
+                xcode: ${{ matrix.xcode }}
+
+            - name: Run tests
+              uses: ./.github/actions/test
+              with:
+                xcode: ${{ matrix.xcode }}
+                scheme: ${{ matrix.platform.scheme }}
+                platform: ${{ matrix.platform.os }}
+
+            - name: Convert coverage report
+              if: ${{ matrix.platform.os == 'iOS' }}
+              run: bundle exec slather coverage -x --scheme ${{ matrix.platform.scheme }} ${{ env.xcodeproj }}
+
+            - name: Upload coverage report
+              if: ${{ matrix.platform.os == 'iOS' }}
+              uses: codecov/codecov-action@4fe8c5f003fae66aa5ebb77cfd3e7bfbbda0b6b0
+
+    test-package:
+        name: Test Swift package using Xcode ${{ matrix.xcode }}
+        runs-on: macos-13
+
+        strategy:
+          matrix:
+            xcode: 
+              - '15.0.1'
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+            - name: Set up environment
+              uses: ./.github/actions/setup
+              with:
+                xcode: ${{ matrix.xcode }}
+
+            - name: Run tests
+              run: swift test
+
+    pod-lint:
+        name: Lint podspec using Xcode ${{ matrix.xcode }}
+        runs-on: macos-13
+
+        strategy:
+          matrix:
+            xcode: 
+              - '15.0.1'
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+            - name: Set up environment
+              uses: ./.github/actions/setup
+              with:
+                xcode: ${{ matrix.xcode }}
+
+            - name: Run pod lib lint
+              run: bundle exec pod lib lint --allow-warnings --fail-fast
+
+    swiftlint:
+        name: Lint code with SwiftLint
+        runs-on: macos-13
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11
+
+            - name: Run SwiftLint
+              run: swiftlint lint --reporter github-actions-logging

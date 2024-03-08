@@ -1,0 +1,19 @@
+{
+  "commitish" : "1.1.0",
+  "iOS" : [
+    {
+      "hash" : "61ef4441c07af16a331bc66e23d30b3cc8192ec292f439b9023e55b3c37d3a7e",
+      "container" : "SimpleKeychain.xcframework",
+      "identifier" : "ios-arm64",
+      "name" : "SimpleKeychain",
+      "swiftToolchainVersion" : "5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)"
+    },
+    {
+      "name" : "SimpleKeychain",
+      "container" : "SimpleKeychain.xcframework",
+      "hash" : "6e93237700a7f085a8059a3e6c8980b51820a0bdc647b87227cc9e2092a862b6",
+      "identifier" : "ios-arm64_x86_64-simulator",
+      "swiftToolchainVersion" : "5.10 (swiftlang-5.10.0.13 clang-1500.3.9.4)"
+    }
+  ]
+}

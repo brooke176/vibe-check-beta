@@ -1,0 +1,4 @@
+scheme "SimpleKeychain-iOS"
+devices ["iPhone 12"]
+
+clean true

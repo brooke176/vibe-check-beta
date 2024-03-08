@@ -1,25 +1,79 @@
 import SwiftUI
 import UserNotifications
 import Auth0
-
+import ContactsUI
+import OSLog
 
 struct ContentView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
     @State private var wantsToGoOut = false
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var showingContactPicker = false
+    @State private var showingShareSheet = false
+    let testFlightLink = "https://testflight.apple.com/join/AWthlKxo"
     
     var body: some View {
         ZStack {
             BackgroundGradientView()
-
-            VStack {
-                HeaderView(title: "Who you tryna see? ✨")
-                FriendsScrollView()
-                GoOutButton(wantsToGoOut: $wantsToGoOut) {
-                    scheduleNotification()
+            
+                VStack {
+                    HeaderView(title: "Who you tryna see? ✨")
+                    FriendsScrollView()
+                    GoOutButton(wantsToGoOut: $wantsToGoOut) {
+                        scheduleNotification()
+                    }
+                    Button("Log out") {
+                        authViewModel.logout()
+                    }
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Capsule().fill(Color.green))
+                    .shadow(radius: 5)
                 }
+        }
+
+            .sheet(isPresented: $showingShareSheet) {
+                ActivityViewController(activityItems: ["Check out vibe check on TestFlight: \(testFlightLink)"])
+            }
+            .sheet(isPresented: $showingContactPicker) {
+                ContactPicker(phoneNumber: .constant(""))
             }
         }
+    
+    var inviteFriendsSection: some View {
+        VStack(spacing: 20) {
+            Spacer()
+            
+            Text("invite besties <3")
+                .font(.largeTitle)
+                .bold()
+                .foregroundColor(.white)
+            
+            Button(action: { showingContactPicker = true }) {
+                Text("Pick from Contacts")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Capsule().fill(Color.blue))
+                    .shadow(radius: 5)
+            }
+            .padding(.horizontal)
+            
+            Button(action: { showingShareSheet = true }) {
+                Text("Send TestFlight Invitation")
+                    .foregroundColor(.white)
+                    .padding()
+                    .background(Capsule().fill(Color.green))
+                    .shadow(radius: 5)
+            }
+            .padding(.horizontal)
+            
+            Spacer()
+        }
     }
+    
+//    func generateInviteLink() -> String {
+//        let userId = self.userProfile.id
+//        return "https://testflight.apple.com/join/\(userId)"
+//    }
 
     private func scheduleNotification() {
         let center = UNUserNotificationCenter.current()
@@ -40,35 +94,18 @@ struct ContentView: View {
     }
 }
 
-struct BackgroundGradientView: View {
-    var body: some View {
-        LinearGradient(gradient: Gradient(colors: [Color.purple, Color.blue]), startPoint: .topLeading, endPoint: .bottomTrailing)
-            .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct HeaderView: View {
-    let title: String
-
-    var body: some View {
-        Text(title)
-            .font(.largeTitle)
-            .fontWeight(.bold)
-            .foregroundColor(.white)
-            .padding()
-            .shadow(radius: 10)
-    }
-}
-
 struct FriendsScrollView: View {
+    func loadFriends() {
+         authViewModel.updateFriendsList()
+    }
     @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 10) {
                 ForEach(authViewModel.friends) { friend in
-                    FriendCircleView(friend: friend.id, isSelected: authViewModel.selectedFriends.contains(friend.id))
-                        .onTapGesture {
+                    FriendCircleView(friend: friend, isSelected: authViewModel.selectedFriends.contains(friend.id))
+                                            .onTapGesture {
                             self.toggleFriendSelection(friend.id)
                         }
                 }
@@ -88,11 +125,11 @@ struct FriendsScrollView: View {
 }
 
 struct FriendCircleView: View {
-    var friend: String
+    var friend: Friend
     var isSelected: Bool
 
     var body: some View {
-        Text(String(friend.prefix(5)))
+        Text(friend.firstName)
             .font(.caption)
             .fontWeight(.medium)
             .foregroundColor(.white)
@@ -104,7 +141,6 @@ struct FriendCircleView: View {
             .shadow(radius: 3)
     }
 }
-
 
 struct GoOutButton: View {
     @Binding var wantsToGoOut: Bool
@@ -129,10 +165,3 @@ struct GoOutButton: View {
         .padding(.bottom, 50)
     }
 }
-
-//struct ContentView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        let authViewModel = AuthViewModel(friendsList: ["823491832u4323e213e12323e1", "1234823491832u4323e213e12323e1", "823491832u4323e213e12323e123", "314132823491832u4323e213e12323e1", "1341323823491832u4323e213e12323e1"])
-//        ContentView().environmentObject(authViewModel)
-//    }
-//}

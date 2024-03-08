@@ -1,52 +1,49 @@
 import SwiftUI
-import Auth0
-import UIKit
-
-class AppDelegate: UIResponder, UIApplicationDelegate {
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        return true
-    }
-}
+import OSLog
 
 @main
-struct VibeCheckBetaApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+struct vibe_check_betaApp: App {
     @StateObject var authViewModel = AuthViewModel()
-    @State private var activeLink: ActiveLink? = nil
-    @Environment(\.scenePhase) private var scenePhase
+    @State private var inviterID: String? = nil
+    @State private var showingAcceptInvitationView = false
     
-    enum ActiveLink {
-        case acceptInvitation(inviterUserID: String), main
-    }
-
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environmentObject(authViewModel)
-                .onAppear {
-                    checkUserState()
-                }
-                .onChange(of: scenePhase) { _ in
-                    checkUserState()
-                }
-        }
-    }
-    
-    func checkUserState() {
-        authViewModel.checkAuth0Session { isAuthenticated in
-            if isAuthenticated {
-                if let activeLink = activeLink, case let .acceptInvitation(inviteID) = activeLink {
-                    acceptInvitation(inviteID: inviteID)
-                } else {
-                    self.activeLink = .main
-                }
+            if authViewModel.userSignedIn {
+                ContentView().environmentObject(authViewModel)
             } else {
-                self.activeLink = nil
+                LoginView().environmentObject(authViewModel)
             }
         }
     }
+    
+    //once its in app store
+    
+    //    var body: some Scene {
+    //        WindowGroup {
+    //            NavigationView {
+    //                if showingAcceptInvitationView, let inviterID = inviterID {
+    //                    AcceptInvitationView(inviterUserID: inviterID, invitedName: inviterID)
+    //                } else {
+    //                    ContentView().environmentObject(authViewModel)
+    //                }
+    //            }
+    //            .onOpenURL { url in
+    //                handleDeepLink(url)
+    //            }
+    //        }
+    //    }
+    
+    //    func handleDeepLink(_ url: URL) {
+    //        if url.pathComponents.contains("invite"), let lastComponent = url.pathComponents.last {
+    //            inviterID = lastComponent
+    //            showingAcceptInvitationView = true
+    //        }
+    //    }
+}
 
-    func acceptInvitation(inviteID: String) {
-        self.activeLink = .acceptInvitation(inviterUserID: inviteID)
-    }
+extension Logger {
+    private static var subsystem = "vibe"
+    static let viewCycle = Logger(subsystem: subsystem, category: "viewcycle")
+    static let statistics = Logger(subsystem: subsystem, category: "statistics")
 }

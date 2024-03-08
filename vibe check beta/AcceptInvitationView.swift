@@ -1,5 +1,4 @@
 import SwiftUI
-import Auth0
 
 struct AcceptInvitationView: View {
     let inviterUserID: String
@@ -11,9 +10,6 @@ struct AcceptInvitationView: View {
 
     var body: some View {
         ZStack {
-            NavigationLink(destination: ContentView().environmentObject(authViewModel), isActive: $authViewModel.navigateToContent) {
-                EmptyView()
-            }
             LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.purple.opacity(0.8)]), startPoint: .top, endPoint: .bottom)
                 .edgesIgnoringSafeArea(.all)
             
@@ -42,10 +38,10 @@ struct AcceptInvitationView: View {
                     .padding()
                 
                 HStack(spacing: 40) {
-                    Button("Accept") {
-//                        authViewModel.acceptInvitation(inviteID: inviterUserID)
-                    }
-                    .buttonStyle(SleekButtonStyle(backgroundColor: Color.green))
+//                    Button("Accept") {
+//                        authViewModel.acceptInvitation(inviterUserID: inviterUserID, completion: <#T##((any Error)?) -> Void#>)
+//                    }
+//                    .buttonStyle(SleekButtonStyle(backgroundColor: Color.green))
                     
                     Button("Decline") {
                         print("nvm")
@@ -59,21 +55,6 @@ struct AcceptInvitationView: View {
         }
     }
     }
-
-struct SleekButtonStyle: ButtonStyle {
-    var backgroundColor: Color
-    
-    func makeBody(configuration: Configuration) -> some View {
-        configuration.label
-            .foregroundColor(.white)
-            .padding()
-            .background(backgroundColor)
-            .cornerRadius(15)
-            .shadow(radius: 10)
-            .scaleEffect(configuration.isPressed ? 0.9 : 1.0)
-            .animation(.easeOut, value: configuration.isPressed)
-    }
-}
 
 struct AcceptInvitationView_Previews: PreviewProvider {
     static var previews: some View {
