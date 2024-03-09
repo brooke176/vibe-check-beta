@@ -7,6 +7,7 @@ import OSLog
 struct ContentView: View {
     @State private var wantsToGoOut = false
     @EnvironmentObject var authViewModel: AuthViewModel
+    @StateObject var webSocketManager = WebSocketManager()
     @State private var showingContactPicker = false
     @State private var showingShareSheet = false
     let testFlightLink = "https://testflight.apple.com/join/AWthlKxo"
@@ -15,28 +16,32 @@ struct ContentView: View {
         ZStack {
             BackgroundGradientView()
             
-                VStack {
-                    HeaderView(title: "Who you tryna see? ✨")
-                    FriendsScrollView()
-                    GoOutButton(wantsToGoOut: $wantsToGoOut) {
-                        scheduleNotification()
-                    }
-                    Button("Log out") {
-                        authViewModel.logout()
-                    }
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(Capsule().fill(Color.green))
-                    .shadow(radius: 5)
+            VStack {
+                HeaderView(title: "Who you tryna see? ✨")
+                FriendsScrollView()
+                GoOutButton(wantsToGoOut: $wantsToGoOut)
+                
+                Button("Log out") {
+                    authViewModel.logout()
                 }
+                .foregroundColor(.white)
+                .padding()
+                .background(Capsule().fill(Color.green))
+                .shadow(radius: 5)
+            }
         }
-
-            .sheet(isPresented: $showingShareSheet) {
-                ActivityViewController(activityItems: ["Check out vibe check on TestFlight: \(testFlightLink)"])
+        .onAppear {
+            let userId = authViewModel.userProfile.id
+            if !userId.isEmpty { // Check if userId is not empty
+                webSocketManager.connect(userId: userId)
             }
-            .sheet(isPresented: $showingContactPicker) {
-                ContactPicker(phoneNumber: .constant(""))
-            }
+        }
+        .sheet(isPresented: $showingShareSheet) {
+            ActivityViewController(activityItems: ["Check out vibe check on TestFlight: \(testFlightLink)"])
+        }
+        .sheet(isPresented: $showingContactPicker) {
+            ContactPicker(phoneNumber: .constant(""))
+        }
         }
     
     var inviteFriendsSection: some View {
@@ -69,34 +74,12 @@ struct ContentView: View {
             Spacer()
         }
     }
-    
-//    func generateInviteLink() -> String {
-//        let userId = self.userProfile.id
-//        return "https://testflight.apple.com/join/\(userId)"
-//    }
-
-    private func scheduleNotification() {
-        let center = UNUserNotificationCenter.current()
-
-        center.requestAuthorization(options: [.alert, .sound]) { granted, _ in
-            if granted {
-                let content = UNMutableNotificationContent()
-                content.title = "Let's Go Out!"
-                content.body = "You're ready to go out! Let's see if your friends are too!"
-                content.sound = UNNotificationSound.default
-
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                center.add(request)
-            }
-        }
-    }
 }
 
 struct FriendsScrollView: View {
     func loadFriends() {
-         authViewModel.updateFriendsList()
+         authViewModel.fetchFriendsData()
+        print("friends", authViewModel.friends)
     }
     @EnvironmentObject var authViewModel: AuthViewModel
 
@@ -129,7 +112,7 @@ struct FriendCircleView: View {
     var isSelected: Bool
 
     var body: some View {
-        Text(friend.firstName)
+        Text(friend.name)
             .font(.caption)
             .fontWeight(.medium)
             .foregroundColor(.white)
@@ -144,13 +127,13 @@ struct FriendCircleView: View {
 
 struct GoOutButton: View {
     @Binding var wantsToGoOut: Bool
-    let action: () -> Void
+    @EnvironmentObject var authViewModel: AuthViewModel
 
     var body: some View {
         Button(action: {
             withAnimation {
                 wantsToGoOut.toggle()
-                action()
+                authViewModel.sendGoOutIntent(selectedFriends: authViewModel.selectedFriends, wantsToGoOut: wantsToGoOut)
             }
         }) {
             Text(wantsToGoOut ? "🚫 nvm lol" : "✨ Let's Go Out!")
@@ -165,3 +148,4 @@ struct GoOutButton: View {
         .padding(.bottom, 50)
     }
 }
+

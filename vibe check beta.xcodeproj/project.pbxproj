@@ -14,6 +14,7 @@
 		EE81FFBA2B9A9FF4009FC75C /* JWTDecode.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE6A75722B9A594E0022E297 /* JWTDecode.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		EE81FFBB2B9A9FF5009FC75C /* SimpleKeychain.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE6A75712B9A594E0022E297 /* SimpleKeychain.xcframework */; };
 		EE81FFBC2B9A9FF5009FC75C /* SimpleKeychain.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = EE6A75712B9A594E0022E297 /* SimpleKeychain.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		EE81FFBE2B9BD61D009FC75C /* Websocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE81FFBD2B9BD61D009FC75C /* Websocket.swift */; };
 		EEADCC5D2B96852100DD672E /* vibe_check_betaApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC5C2B96852100DD672E /* vibe_check_betaApp.swift */; };
 		EEADCC5F2B96852100DD672E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EEADCC5E2B96852100DD672E /* ContentView.swift */; };
 		EEADCC612B96852200DD672E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EEADCC602B96852200DD672E /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		EE6A75722B9A594E0022E297 /* JWTDecode.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = JWTDecode.xcframework; path = Carthage/Build/JWTDecode.xcframework; sourceTree = "<group>"; };
 		EE81FFB52B9A6E91009FC75C /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		EE81FFB72B9A6EF9009FC75C /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		EE81FFBD2B9BD61D009FC75C /* Websocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Websocket.swift; sourceTree = "<group>"; };
 		EEADCC592B96852100DD672E /* vibe check beta.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "vibe check beta.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEADCC5C2B96852100DD672E /* vibe_check_betaApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vibe_check_betaApp.swift; sourceTree = "<group>"; };
 		EEADCC5E2B96852100DD672E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				EE81FFB52B9A6E91009FC75C /* AuthView.swift */,
 				EE81FFB72B9A6EF9009FC75C /* Profile.swift */,
 				EEADCC5E2B96852100DD672E /* ContentView.swift */,
+				EE81FFBD2B9BD61D009FC75C /* Websocket.swift */,
 				EEADCCBE2B96C43F00DD672E /* LoginView.swift */,
 				EEADCC6C2B968F5F00DD672E /* AcceptInvitationView.swift */,
 				EEADCC602B96852200DD672E /* Assets.xcassets */,
@@ -215,6 +218,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EEADCC5F2B96852100DD672E /* ContentView.swift in Sources */,
+				EE81FFBE2B9BD61D009FC75C /* Websocket.swift in Sources */,
 				EEADCCBF2B96C43F00DD672E /* LoginView.swift in Sources */,
 				EEADCC6D2B968F5F00DD672E /* AcceptInvitationView.swift in Sources */,
 				EEEF2E022B9A4045003049F9 /* Common.swift in Sources */,
